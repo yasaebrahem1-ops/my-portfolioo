@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobhy Youssef | CTO at CodeCraft | Systems Architect</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;500&family=Poppins:wght@200;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #00e5ff;
+            --secondary: #0072ff;
+            --accent: #7000ff;
+            --bg-body: #f0f4f8;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --text-main: #1a202c;
+            --code-bg: #1e1e1e;
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --shadow-soft: 0 20px 50px rgba(0,0,0,0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        body {
+            background: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .mesh-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(at 0% 0%, rgba(0, 229, 255, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(112, 0, 255, 0.1) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(0, 114, 255, 0.05) 0px, transparent 50%);
+            filter: blur(80px);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: var(--secondary); border-radius: 10px; }
+
+        /* ================= NAVIGATION ================= */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            z-index: 2000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .logo { font-family: 'Orbitron'; font-weight: 900; font-size: 1.4rem; color: var(--secondary); }
+        .logo span { color: var(--text-main); }
+        .brand-tag { font-size: 0.6rem; letter-spacing: 3px; display: block; color: var(--accent); }
+
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav a { text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 0.85rem; transition: 0.3s; text-transform: uppercase; }
+        nav a:hover { color: var(--primary); }
+
+        /* ================= HERO SECTION ================= */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            padding: 150px 8% 50px;
+            gap: 50px;
+        }
+        .hero-info { flex: 1; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            background: #fff;
+            border-radius: 50px;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 25px;
+            border: 1px solid var(--glass-border);
+        }
+        .hero-badge span { width: 10px; height: 10px; background: #00ff88; border-radius: 50%; margin-right: 10px; animation: pulse 1.5s infinite; }
+        
+        .hero h1 { font-family: 'Orbitron'; font-size: 4.5rem; line-height: 1; margin-bottom: 20px; }
+        .hero h1 span { color: var(--secondary); -webkit-text-stroke: 1px var(--secondary); -webkit-text-fill-color: transparent; }
+        
+        .hero p { font-size: 1.1rem; color: #555; max-width: 600px; margin-bottom: 35px; }
+
+        .cta-group { display: flex; gap: 20px; }
+        .btn {
+            padding: 16px 35px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.4s;
+            font-family: 'Orbitron';
+            font-size: 0.8rem;
+        }
+        .btn-primary { background: var(--secondary); color: #fff; box-shadow: 0 10px 25px rgba(0, 114, 255, 0.3); }
+        .btn-primary:hover { transform: translateY(-5px); }
+
+        /* ================= STACK SECTION ================= */
+        #stack { padding: 80px 8%; background: rgba(255,255,255,0.2); }
+      .stats-grid {
+    display: grid;
+    /* التعديل ده بيخلي البوكسات تصغر وتكبر حسب حجم الشاشة بشكل احترافي */
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+    gap: 15px;
+    padding: 20px;
+}
+
+.stat-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    padding: 20px 10px;
+    border-radius: 12px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.stat-box:hover {
+    border-color: var(--secondary);
+    background: rgba(0, 255, 136, 0.05);
+    transform: translateY(-5px);
+}
+
+.stat-box h4 {
+    font-size: 1.1rem;
+    color: var(--secondary);
+    margin-bottom: 5px;
+}
+
+.stat-box small {
+    color: #888;
+    font-size: 0.8rem;
+}
+
+/* تمييز بوكس التيستنج الرئيسي */
+.stat-box.highlight {
+    border: 1px dashed var(--secondary);
+    cursor: pointer;
+}
+        
+        .stat-box h3 { font-size: 2rem; font-family: 'Orbitron'; color: var(--secondary); }
+
+        /* ================= PROJECTS ================= */
+        section { padding: 100px 8%; }
+        .sec-header { text-align: center; margin-bottom: 80px; }
+        .sec-header h2 { font-family: 'Orbitron'; font-size: 3rem; position: relative; display: inline-block; }
+        .sec-header h2::after { content: ''; position: absolute; bottom: -10px; left: 0; width: 50%; height: 4px; background: var(--primary); }
+
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: #fff;
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+        .project-card:hover { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+        .p-banner { height: 200px; background: linear-gradient(135deg, var(--secondary), var(--accent)); padding: 40px; color: #fff; }
+        .p-body { padding: 35px; }
+        .p-tag { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 5px; font-size: 0.7rem; margin-right: 5px; }
+
+        /* ================= TERMINAL MODAL ================= */
+        .terminal-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.98);
+            z-index: 5000;
+            display: none;
+            padding: 50px;
+            overflow-y: auto;
+        }
+        .terminal-window {
+            max-width: 1000px;
+            margin: auto;
+            background: var(--code-bg);
+            border-radius: 15px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+        /* ضيف ده في الـ <style> */
+#term-content::after {
+    content: '_';
+    animation: blink 1s infinite;
+    color: #00ff88;
+}
+
+@keyframes blink {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+        .t-header { background: #333; padding: 10px 20px; display: flex; gap: 8px; align-items: center; }
+        .t-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .t-content { padding: 40px; color: #00ff88; font-family: 'JetBrains Mono', monospace; line-height: 1.6; }
+        .key { color: #ff79c6; }
+        .val { color: #f1fa8c; }
+        .comment { color: #6272a4; }
+        .timeline {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+    }
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        width: 2px;
+        height: 100%;
+        background: var(--glass-border);
+    }
+    .timeline-item {
+        margin-bottom: 50px;
+        position: relative;
+        width: 50%;
+        padding: 0 40px;
+    }
+    .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+    .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+    
+    .timeline-dot {
+        position: absolute;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        background: var(--secondary);
+        border-radius: 50%;
+        left: calc(100% - 10px);
+        z-index: 10;
+        box-shadow: 0 0 15px var(--secondary);
+    }
+    .timeline-item:nth-child(even) .timeline-dot { left: -10px; }
+    
+    .timeline-content {
+        background: #fff;
+        padding: 25px;
+        border-radius: 20px;
+        border: 1px solid var(--glass-border);
+        transition: 0.3s;
+    }
+    .timeline-content:hover { transform: scale(1.05); border-color: var(--primary); }
+    .timeline-date { color: var(--accent); font-weight: 800; font-size: 0.8rem; font-family: 'Orbitron'; }
+
+        footer { background: #fff; padding: 80px 8% 40px; border-top: 1px solid #eee; text-align: center; }
+        .footer-logo { font-family: 'Orbitron'; font-size: 2rem; color: var(--secondary); margin-bottom: 20px; }
+
+        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+        /* تنسيق سيكشن الشهادات */
+#certificates { padding: 100px 8%; background: rgba(255,255,255,0.1); }
+
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 50px;
+}
+
+.cert-card {
+    background: #fff;
+    border: 1px solid var(--glass-border);
+    padding: 35px;
+    border-radius: 25px;
+    position: relative;
+    transition: 0.4s ease;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+}
+
+.cert-card:hover { transform: translateY(-10px); border-color: var(--secondary); }
+
+.nasa-special {
+    background: linear-gradient(145deg, #ffffff, #e6f7ff);
+    border: 2px solid #005288;
+}
+
+.cert-icon { font-size: 2.5rem; margin-bottom: 20px; }
+.cert-card h4 { font-family: 'Orbitron'; color: var(--secondary); margin-bottom: 10px; }
+.cert-card p { font-weight: 600; color: var(--text-main); margin-bottom: 5px; }
+.cert-card small { color: #666; font-size: 0.85rem; }
+
+.cert-badge {
+    position: absolute;
+    top: 20px;
+    right: -35px;
+    background: #fc3d21;
+    color: #fff;
+    padding: 5px 40px;
+    transform: rotate(45deg);
+    font-size: 0.6rem;
+    font-weight: 900;
+    font-family: 'Orbitron';
+}
+.cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 40px; }
+.cert-card { background: #fff; border: 1px solid #eee; padding: 25px; border-radius: 20px; transition: 0.4s; cursor: pointer; position: relative; overflow: hidden; }
+.cert-card:hover { transform: translateY(-10px); border-color: #0072ff; }
+.cert-img-container { width: 100%; height: 200px; border-radius: 10px; overflow: hidden; margin-bottom: 15px; }
+.cert-img { width: 100%; height: 100%; object-fit: cover; }
+.cert-badge { position: absolute; top: 15px; right: -30px; background: #fc3d21; color: #fff; padding: 5px 40px; transform: rotate(45deg); font-size: 0.6rem; font-weight: bold; }
+.nasa-special { border: 2px solid #0b3d91; }
+/* تصميم الـ Glassmorphism */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    transition: all 0.5s ease;
+}
+
+.p-body p {
+    color: #bbb; /* لون النص الوصفي */
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* عداد الأرقام الحي */
+.live-counter {
+    margin-top: 15px;
+    font-size: 1.8rem;
+    font-family: 'Orbitron';
+    color: var(--primary);
+    font-weight: 900;
+}
+.live-counter span {
+    display: block;
+    font-size: 0.7rem;
+    font-family: 'Poppins';
+    color: #fff;
+    opacity: 0.7;
+    letter-spacing: 1px;
+}
+
+/* تأثيرات الـ Glow عند المرور بالماوس */
+.real-estate-glow:hover {
+    border-color: #0072ff !important;
+    box-shadow: 0 0 30px rgba(0, 114, 255, 0.3);
+}
+
+.nasa-glow:hover {
+    border-color: #fc3d21 !important;
+    box-shadow: 0 0 30px rgba(252, 61, 33, 0.3);
+}
+
+.medical-glow:hover {
+    border-color: #00ff88 !important;
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+}
+
+/* تحسين شكل البانر */
+.p-banner {
+    background-size: cover !important;
+    background-position: center !important;
+    height: 220px !important;
+    padding: 30px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+/* الألوان الإضافية للـ Glow */
+.vault-glow:hover { border-color: #7000ff !important; box-shadow: 0 0 30px rgba(112, 0, 255, 0.4); }
+.shop-glow:hover { border-color: #ffa500 !important; box-shadow: 0 0 30px rgba(255, 165, 0, 0.4); }
+.hotel-glow:hover { border-color: #00e5ff !important; box-shadow: 0 0 30px rgba(0, 229, 255, 0.4); }
+
+/* تنسيق الـ Grid ليكون 3 أعمدة في الشاشات الكبيرة */
+.projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+.nav-btn {
+    padding: 8px 20px;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    transition: 0.3s;
+    background: rgba(0, 229, 255, 0.05);
+}
+
+.nav-btn:hover {
+    background: var(--primary);
+    color: #000;
+    box-shadow: 0 0 15px var(--primary);
+}
+/* تنسيق الصورة في الهيرو */
+.hero {
+    display: flex;
+    justify-content:间-between;
+    align-items: center;
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.image-wrapper {
+    width: 350px;
+    height: 450px;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; /* شكل عضوي احترافي */
+    overflow: hidden;
+    border: 3px solid var(--primary);
+    box-shadow: 0 0 50px rgba(0, 229, 255, 0.2);
+    animation: morphing 10s infinite alternate;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%) contrast(110%);
+}
+
+@keyframes morphing {
+    0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    100% { border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%; }
+}
+
+/* البادجات العائمة */
+.floating-badge {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 15px;
+    box-shadow: var(--shadow-soft);
+    font-family: 'Orbitron';
+    font-size: 0.7rem;
+    backdrop-filter: blur(10px);
+}
+.badge-1 { top: 20%; left: 0; animation: float 3s infinite ease-in-out; }
+.badge-2 { bottom: 10%; right: 0; animation: float 3s infinite ease-in-out 1.5s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+.cert-img-container {
+    width: 100%;
+    height: 200px;
+    background: #111; /* خلفية داكنة لو الصورة فيها أجزاء شفافة */
+    border-radius: 12px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 114, 255, 0.2);
+}
+
+.cert-img {
+    max-width: 100%;
+    max-height: 100%;
+    transition: transform 0.5s ease;
+}
+
+.cert-card:hover .cert-img {
+    transform: scale(1.05); /* تأثير زووم بسيط عند الوقوف بالماوس */
+}
+#imageModal {
+    z-index: 9999; /* عشان تظهر فوق التيرمينال وفوق أي حاجة تانية */
+    cursor: zoom-out;
+}
+
+#fullCertImage {
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+    </style>
+</head>
+<body>
+
+    <div class="mesh-bg"></div>
+
+    <header>
+    <div class="logo">CODE<span>CRAFT</span><span class="brand-tag">YOUSSEF INDUSTRIES</span></div>
+    <nav>
+        <ul>
+            <li><a href="#home">Terminal</a></li>
+            <li><a href="#stack">Arsenal</a></li>
+            <li><a href="#projects">Deployments</a></li>
+            <li><a href="https://wa.me/201007586110" target="_blank">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="header-cta" style="margin-top: 20px; display: flex; gap: 15px; justify-content: center;">
+      <a href="https://www.linkedin.com/in/sobhey-yousef" target="_blank" class="nav-btn">LinkedIn</a>
+        <a href="javascript:void(0)" onclick="handleCV()" class="nav-btn">View CV</a>
+    </div>
+</header>
+
+    <main id="home">
+        <section class="hero">
+            <div class="hero-info">
+                <div class="hero-badge"><span></span> System Status: Online & Scaling</div>
+                <h1>Sobhy <span>Youssef</span></h1>
+                <p>Lead Systems Architect & CTO at <strong>CodeCraft</strong>. Engineering digital legacies through complex Backend systems and AI-driven solutions.</p>
+                <div class="cta-group">
+                    <a href="#projects" class="btn btn-primary">Analyze Systems</a>
+                    <a href="https://wa.me/201007586110" target="_blank" class="btn" style="border: 1px solid #ccc;">Direct Link (WhatsApp)</a>
+                </div>
+            </div>
+        <div class="hero-image">
+    <div class="image-wrapper">
+        <img src="nasa-cert.jpg" alt="Sobhy Youssef">
+        <div class="image-overlay"></div>
+    </div>
+    <div class="floating-badge badge-1"><span>50+</span> Projects</div>
+    <div class="floating-badge badge-2"><span>5+</span> Years Exp.</div>
+</div>
+        </section>
+
+       <section id="stack">
+    <div class="sec-header">
+        <h2>TECHNICAL <span>ARSENAL</span></h2>
+    </div>
+    <div class="stats-grid">
+        <div class="stat-box"><h4>PHP 8.3</h4><small>Laravel Framework</small></div>
+        <div class="stat-box"><h4>JavaScript</h4><small>ES6+ & Async Programming</small></div>
+        <div class="stat-box"><h4>HTML/CSS</h4><small>Responsive Design</small></div>
+
+        <div class="stat-box"><h4>Java</h4><small>OOP & Data Structures</small></div>
+        <div class="stat-box"><h4>C Programming</h4><small>Low-level Logic</small></div>
+        <div class="stat-box"><h4>C++</h4><small>System Programming</small></div>
+
+        <div class="stat-box"><h4>Database</h4><small>SQL & Relational Design</small></div>
+        <div class="stat-box"><h4>Software Engineering</h4><small>SDLC & Design Patterns</small></div>
+        <div class="stat-box"><h4>Computer Architecture</h4><small>ISA & System Design</small></div>
+
+        <div class="stat-box"><h4>Embedded Systems</h4><small>Microcontrollers (AVR/ARM)</small></div>
+        <div class="stat-box"><h4>IoT</h4><small>Sensors & Connectivity</small></div>
+
+        <div class="stat-box highlight" onclick="openTestingDetails()">
+            <h4>Software Testing</h4>
+            <small>Full STLC Lifecycle</small>
+        </div>
+        <div class="stat-box"><h4>Manual Testing</h4><small>Black Box & Regression</small></div>
+        <div class="stat-box"><h4>Automated Testing</h4><small>Unit & Integration Tests</small></div>
+    </div>
+</section>
+     <section id="projects">
+    <div class="sec-header">
+        <h2>CORE <span>INFRASTRUCTURE</span></h2>
+        <p style="color: #888; font-family: 'JetBrains Mono'; margin-top: 15px;">System status: 06 Clusters Operational & Synchronized</p>
+    </div>
+    
+    <div class="projects-container">
+        
+        <div class="project-card glass-card real-estate-glow" onclick="window.open('https://sadat-city.infinityfree.me/', '_blank')">
+            <div class="p-banner" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=500&q=80');">
+                <div class="status-indicator"><span class="pulse-dot"></span> ONLINE</div>
+                <h4>Sadat City OS</h4>
+                <div class="live-counter">+10k <span>Assets Managed</span></div>
+            </div>
+            <div class="p-body">
+                <p>A comprehensive real estate management engine. Implemented advanced spatial indexing for property mapping and an automated financial core for contract lifecycle management. Optimized for high-traffic property browsing with Redis caching.</p>
+                <div class="p-tag-cloud">
+                    <span class="p-tag">PHP/Laravel</span><span class="p-tag">MySQL</span><span class="p-tag">Geo-Search</span>
+                </div>
+                <div class="p-footer"><code>01 / PUBLIC_WEB_ACCESS</code></div>
+            </div>
+        </div>
+
+        <div class="project-card glass-card nasa-glow" onclick="openNASA()">
+            <div class="p-banner" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://www.nasa.gov/wp-content/uploads/2023/03/stsci-01h069r89ksf9v8psbxy0tge3a.jpg');">
+                <div class="status-indicator" style="background: rgba(252, 61, 33, 0.2); color: #fc3d21;"><span class="pulse-dot" style="background: #fc3d21;"></span> DEPLOYED</div>
+                <h4>EarlyEpi-Ready</h4>
+                <div class="live-counter">98.2% <span>Prediction Accuracy</span></div>
+            </div>
+            <div class="p-body">
+                <p>Global pandemic forecasting system for NASA Space Apps. It correlates environmental satellite telemetry (MODIS/VIIRS) with epidemiological data to predict outbreak zones 14 days in advance using custom ML models.</p>
+                <div class="p-tag-cloud">
+                    <span class="p-tag">Python/AI</span><span class="p-tag">NASA Data</span><span class="p-tag">Big Data</span>
+                </div>
+                <div class="p-footer"><code>02 / GLOBAL_NOMINEE</code></div>
+            </div>
+        </div>
+
+        <div class="project-card glass-card vault-glow" onclick="openVault()">
+            <div class="p-banner" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=500&q=80');">
+                <div class="status-indicator" style="background: rgba(112, 0, 255, 0.2); color: #7000ff;"><span class="pulse-dot" style="background: #7000ff;"></span> ENCRYPTED</div>
+                <h4>CyberVault Pro</h4>
+                <div class="live-counter">SHA-512 <span>Military Grade</span></div>
+            </div>
+            <div class="p-body">
+                <p>Mission-critical file security system. Engineered with end-to-end AES-256 encryption and multi-factor authentication. Features an automated self-destruct mechanism and secure hashing for sensitive digital asset storage.</p>
+                <div class="p-tag-cloud">
+                    <span class="p-tag">CyberSecurity</span><span class="p-tag">Encryption</span><span class="p-tag">Backend</span>
+                </div>
+                <div class="p-footer"><code>03 / SECURE_STORAGE</code></div>
+            </div>
+        </div>
+
+        <div class="project-card glass-card shop-glow" onclick="openShop()">
+            <div class="p-banner" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=500&q=80');">
+                <div class="status-indicator" style="background: rgba(255, 165, 0, 0.2); color: #ffa500;"><span class="pulse-dot" style="background: #ffa500;"></span> SCALING</div>
+                <h4>Vogue Retail OS</h4>
+                <div class="live-counter">+5k <span>Monthly Orders</span></div>
+            </div>
+            <div class="p-body">
+                <p>Full-scale retail commerce platform. Integrated an advanced inventory tracking system, multi-channel payment gateways, and a dynamic discount engine. Built to handle massive concurrent user sessions during peak sales.</p>
+                <div class="p-tag-cloud">
+                    <span class="p-tag">E-Commerce</span><span class="p-tag">Cart-Logic</span><span class="p-tag">API-Ready</span>
+                </div>
+                <div class="p-footer"><code>04 / RETAIL_SOLUTION</code></div>
+            </div>
+        </div>
+
+        <div class="project-card glass-card medical-glow" onclick="openMedical()">
+            <div class="p-banner" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=500&q=80');">
+                <div class="status-indicator" style="background: rgba(0, 255, 136, 0.2); color: #00ff88;"><span class="pulse-dot" style="background: #00ff88;"></span> HIPAA</div>
+                <h4>MedConnect AI</h4>
+                <div class="live-counter">0.2s <span>Latency WebRTC</span></div>
+            </div>
+            <div class="p-body">
+                <p>Low-latency telemedicine infrastructure. Features AI-based patient triaging and secure video-clinical consultations. Designed with high-availability architecture to ensure 24/7 uptime for critical medical data.</p>
+                <div class="p-tag-cloud">
+                    <span class="p-tag">Health-Tech</span><span class="p-tag">WebRTC</span><span class="p-tag">Real-Time</span>
+                </div>
+                <div class="p-footer"><code>05 / CLINICAL_CORE</code></div>
+            </div>
+        </div>
+
+        <div class="project-card glass-card hotel-glow" onclick="openHotel()">
+            <div class="p-banner" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=500&q=80');">
+                <div class="status-indicator" style="background: rgba(0, 229, 255, 0.2); color: #00e5ff;"><span class="pulse-dot"></span> INTEGRATED</div>
+                <h4>Luxe PMS</h4>
+                <div class="live-counter">POS <span>Sync Active</span></div>
+            </div>
+            <div class="p-body">
+                <p>An all-in-one Hospitality Property Management System (PMS). Synchronizes inventory, QR-ordering, and room service requests in real-time. Built to optimize staff workflow and guest experience in 5-star hotels.</p>
+                <div class="p-tag-cloud">
+                    <span class="p-tag">PMS</span><span class="p-tag">Inventory</span><span class="p-tag">Dashboard</span>
+                </div>
+                <div class="p-footer"><code>06 / HOSPITALITY_AI</code></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+    </main>
+
+    <div id="terminalModal" class="terminal-modal" onclick="closeTerminal()">
+        <div class="terminal-window" onclick="event.stopPropagation()">
+            <div class="t-header">
+                <div class="t-dot" style="background: #ff5f56;"></div>
+                <div class="t-dot" style="background: #ffbd2e;"></div>
+                <div class="t-dot" style="background: #27c93f;"></div>
+                <span id="term-path" style="color: #666; font-size: 0.7rem; margin-left: 20px;">sobhy@codecraft:~/$</span>
+            </div>
+            <div class="t-content" id="term-content"></div>
+        </div>
+    </div>
+    <section id="roadmap">
+    <div class="sec-header">
+        <h2>PROFESSIONAL <span>ROADMAP</span></h2>
+    </div>
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2024 - Present</span>
+                <h4>CTO & Founder @ CodeCraft</h4>
+                <p>Architecting high-scale distributed systems and leading the technical vision for bespoke enterprise solutions.</p>
+                <div class="p-tag-cloud">
+                    <span class="p-tag">System Design</span><span class="p-tag">Leadership</span>
+                </div>
+            </div>
+        </div>
+       <section id="certificates" style="padding: 100px 8%;">
+    <div class="sec-header">
+        <h2>HONORARY <span>CERTIFICATES</span></h2>
+    </div>
+    <div class="cert-grid">
+    <div class="cert-card nasa-special" onclick="openNasaCert()">
+        <div class="cert-badge">GLOBAL NOMINEE</div>
+        <div class="cert-img-container">
+            <img src="NASA .jpeg" alt="NASA Certificate" class="cert-img" style="width: 100%; height: 100%; object-fit: contain; background: #0b3d91;">
+        </div>
+        <div class="cert-info">
+            <h4>NASA Space Apps</h4>
+            <p>Global Nominee (Top 10 in Egypt)</p>
+            <small>Project: EarlyEpi-Ready (Satellite Data Analysis)</small>
+        </div>
+    </div>
+</div>
+      
+</section>  
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2024</span>
+                <h4>NASA Space Apps Global Nominee</h4>
+                <p>Recognized for "EarlyEpi-Ready" project, analyzing environmental satellite data for pandemic prevention.</p>
+                <div class="p-tag-cloud">
+                    <span class="p-tag">Big Data</span><span class="p-tag">AI Models</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">2023</span>
+                <h4>Senior Backend Developer</h4>
+                <p>Specialized in Laravel optimization and building secure RESTful APIs for real estate and medical sectors.</p>
+                <div class="p-tag-cloud">
+                    <span class="p-tag">PHP 8.x</span><span class="p-tag">Security</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <footer>
+        <div class="footer-logo">CODE<span>CRAFT</span></div>
+        <p>"We don't just build apps, we engineer digital legacies."</p>
+        <div class="footer-meta">
+            <div class="meta-item"><h4>CTO</h4><p>Sobhy Youssef</p></div>
+            <div class="meta-item"><h4>HQ</h4><p>CodeCraft, Egypt</p></div>
+        </div>
+        <p style="opacity: 0.3; font-size: 0.7rem; margin-top: 20px;">© 2026 CodeCraft Industries. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      
+      function openVault() {
+    const code = `> INITIALIZING CIPHER-CORE...<br>> ENCRYPTION: AES-256-GCM<br>> STATUS: SECURE VAULT ACTIVE<br><br>System engineered for maximum file integrity and zero-knowledge storage.`;
+    openTerminal(code, "security/vault_service.exe");
+}
+
+function openShop() {
+    const code = `> LOADING RETAIL_ENGINE...<br>> SYNCING INVENTORY... DONE<br>> PAYMENT_GATEWAY: READY<br><br>Scaling e-commerce solution for high-volume retail traffic.`;
+    openTerminal(code, "retail/vogue_retail.app");
+}
+       // Typing Effect Engine by CodeCraft
+function openTerminal(content, path) {
+    const termContent = document.getElementById('term-content');
+    const termPath = document.getElementById('term-path');
+    
+    // 1. إظهار المودال وتصفير المحتوى
+    termContent.innerHTML = ""; 
+    termPath.innerText = "sobhy@codecraft:~/projects/" + path;
+    document.getElementById('terminalModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+
+    // 2. محرك الكتابة
+    let i = 0;
+    const speed = 10; // السرعة بالملي ثانية (كل ما قل الرقم زادت السرعة)
+    
+    function typeWriter() {
+        if (i < content.length) {
+            // لو الحرف اللي عليه الدور هو "<" ده معناه بداية Tag HTML
+            // هنخليه يكتبه كله مرة واحدة عشان التنسيق ما يبوظش
+            if (content.charAt(i) === '<') {
+                let tagEnd = content.indexOf('>', i);
+                termContent.innerHTML += content.substring(i, tagEnd + 1);
+                i = tagEnd + 1;
+            } else {
+                termContent.innerHTML += content.charAt(i);
+                i++;
+            }
+            setTimeout(typeWriter, speed);
+        }
+    }
+    
+    // ابدأ الأكشن
+    typeWriter();
+}
+
+        function closeTerminal() {
+            document.getElementById('terminalModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        function openTestingDetails() {
+    const code = `
+    <span class="comment">// DEPI - DIGITAL EGYPT PIONEERS INITIATIVE</span><br>
+    <span class="key">INITIATING</span>: Software Testing Life Cycle (STLC)...<br><br>
+    > <span class="val">PHASE_01</span>: Requirements Analysis<br>
+    > <span class="val">PHASE_02</span>: Test Planning (Test Plan Strategy)<br>
+    > <span class="val">PHASE_03</span>: Test Case Development<br>
+    > <span class="val">PHASE_04</span>: Environment Setup<br>
+    > <span class="val">PHASE_05</span>: Test Execution (Manual/Automated)<br>
+    > <span class="val">PHASE_06</span>: Test Cycle Closure & Bug Reporting<br><br>
+    <span class="key">TECH_STACK</span>: Black Box, White Box, Integration, Regression Testing.<br>
+    <span class="key">STATUS</span>: Certified QA Engineer.
+    `;
+    openTerminal(code, "DEPI/SoftwareTesting/STLC_Report.log");
+}
+
+        function openRealEstate() {
+            const code = `
+            <span class="comment">// Sobhy Youssef - Lead Architect</span><br>
+            <span class="key">class</span> <span class="val">RealEstateEngine</span> {<br>
+            &nbsp;&nbsp;<span class="key">public function</span> <span class="val">optimizeSearch</span>() {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Implementing Full-Text ElasticSearch Indexing</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">return</span> Listing::<span class="val">search</span>($query)-><span class="val">paginate</span>(50);<br>
+            &nbsp;&nbsp;}<br>
+            }<br><br>
+            > <span class="key">STATUS</span>: Operational<br>
+            > <span class="key">FEATURES</span>: Multi-tenancy, Automated Contracts, Redis Cache Layer.<br>
+            > <span class="key">IMPACT</span>: Reduced query time by 85% for 100k+ properties.
+            `;
+            openTerminal(code, "real-estate-os");
+        }
+
+        function openNASA() {
+            const code = `
+            <span class="key">import</span> tensorflow <span class="key">as</span> tf<br>
+            <span class="comment"># EarlyEpi-Ready: NASA Space Apps Global Entry</span><br>
+            <span class="key">def</span> <span class="val">analyze_satellite_data</span>(telemetry):<br>
+            &nbsp;&nbsp;model = tf.keras.models.<span class="val">load_model</span>('epidemic_v4.h5')<br>
+            &nbsp;&nbsp;<span class="key">return</span> model.<span class="val">predict</span>(telemetry)<br><br>
+            > <span class="key">SOURCE</span>: NASA EarthData Satellite API<br>
+            > <span class="key">GOAL</span>: Predict outbreaks 14 days in advance.<br>
+            > <span class="key">COLAB</span>: Built with NASA Space Apps Team.
+            `;
+            openTerminal(code, "earlyepi-ready");
+        }
+
+        function openMedical() {
+            const code = `
+            <span class="key">const</span> <span class="val">TeleMedServer</span> = <span class="key">new</span> <span class="val">WebRTCGateway</span>({<br>
+            &nbsp;&nbsp;encryption: <span class="val">'AES-256-GCM'</span>,<br>
+            &nbsp;&nbsp;compliance: <span class="val">'HIPAA'</span><br>
+            });<br><br>
+            > <span class="key">ENGINE</span>: Smart Triage AI<br>
+            > <span class="key">Uptime</span>: 99.99% for Critical Healthcare.
+            `;
+            openTerminal(code, "medical-os");
+        }
+
+        function openHotel() {
+            const code = `
+            <span class="key">INIT</span> <span class="val">Hospitality_Core_v5</span><br>
+            > Syncing POS with Inventory... <span class="val">[DONE]</span><br>
+            > QR Menu Generation... <span class="val">[DONE]</span><br><br>
+            <span class="comment">// Scalable architecture for 5-star hotel management.</span>
+            `;
+            openTerminal(code, "hospitality-pro");
+        }
+
+        function openSadatCity() {
+        const code = `
+        <span class="comment">// CODECRAFT DATABASE MIGRATION - PROPERTIES TABLE</span><br>
+        <span class="key">Schema</span>::<span class="val">create</span>('properties', <span class="key">function</span> (Blueprint $table) {<br>
+        &nbsp;&nbsp;$table->id();<br>
+        &nbsp;&nbsp;$table->string('uuid')->unique();<br>
+        &nbsp;&nbsp;$table->foreignId('owner_id')->constrained();<br>
+        &nbsp;&nbsp;$table->decimal('price', 15, 2)->index();<br>
+        &nbsp;&nbsp;$table->json('amenities'); <span class="comment">// Dynamic features</span><br>
+        &nbsp;&nbsp;$table->point('location'); <span class="comment">// Spatial indexing for geo-search</span><br>
+        &nbsp;&nbsp;$table->timestamps();<br>
+        });<br><br>
+        > <span class="key">OPTIMIZATION</span>: Partial Indexing on active listings.<br>
+        > <span class="key">REDUNDANCY</span>: Multi-region DB replication via AWS RDS.<br>
+        > <span class="key">LOGIC</span>: Automated Escrow triggers for payment safety.
+        `;
+        openTerminal(code, "database/migrations/properties");
+    }
+    function openSadatCity() {
+    const code = `
+    <span class="comment">// INITIATING MULTI-TENANT ARCHITECTURE...</span><br>
+    <span class="key">use</span> App\\Traits\\Multitenancy;<br><br>
+    <span class="key">class</span> <span class="val">PropertyService</span> {<br>
+    &nbsp;&nbsp;<span class="comment">// Handle image optimization on the fly</span><br>
+    &nbsp;&nbsp;<span class="key">public function</span> <span class="val">processMedia</span>($images) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">foreach</span> ($images <span class="key">as</span> $img) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image::<span class="val">make</span>($img)-><span class="val">resize</span>(1200, 800)-><span class="val">webp</span>();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;}<br>
+    }<br><br>
+    > <span class="key">SERVER_LOAD</span>: Balanced across 3 Nodes.<br>
+    > <span class="key">PAYMENT_GATEWAY</span>: Stripe & PayPal Integration active.<br>
+    > <span class="key">PDF_ENGINE</span>: wkhtmltopdf for contract generation.
+    `;
+    openTerminal(code, "backend/services/PropertyService.php");
+    function openNasaCert() {
+    const code = `
+    <span class="comment">// INITIATING NASA SPACE APPS VERIFICATION...</span><br>
+    <span class="key">ACHIEVEMENT</span>: Global Nominee 2024<br>
+    <span class="key">PROJECT</span>: <span class="val">EarlyEpi-Ready</span><br>
+    <span class="key">LOCATION</span>: NASA Space Apps Cairo Edition<br><br>
+    > <span class="val">TECHNICAL_LOG</span>: Processed MODIS & VIIRS Satellite imagery.<br>
+    > <span class="val">ALGORITHM</span>: Integrated epidemic forecasting with climate data.<br>
+    > <span class="val">RANK</span>: Top 10 National Finalists.<br><br>
+    <span class="comment">/* "One small step for CodeCraft, one giant leap for EarlyEpi." */</span>
+    `;
+    openTerminal(code, "achievements/NASA_SpaceApps_2024.pdf");
+}
+
+function openDepiCert() {
+    const code = `
+    <span class="comment">// DEPI MINISTRY OF COMMUNICATIONS CERTIFICATE</span><br>
+    <span class="key">PROGRAM</span>: Digital Egypt Pioneers Initiative<br>
+    <span class="key">TRACK</span>: Software Testing & Quality Assurance<br><br>
+    > <span class="val">METHODOLOGIES</span>: STLC, Agile Testing, TDD.<br>
+    > <span class="val">TOOLS</span>: Selenium, Postman, JMeter.<br>
+    > <span class="val">VERDICT</span>: Fully qualified for Enterprise QA Pipelines.
+    `;
+    openTerminal(code, "achievements/DEPI_Testing_Certified.log");
+}
+}
+function openNasaCert() {
+    const code = `> NASA_VERIFICATION: SUCCESS<br>> RANK: Global Nominee 2024<br>> PROJECT: EarlyEpi-Ready<br><br>Analyzed NASA satellite data to track epidemic outbreaks.`;
+    openTerminal(code, "certificates/nasa_space_apps.pdf");
+}
+
+function openDepiCert() {
+    const code = `> DEPI_CERTIFIED: Software Testing<br>> TRACK: QA & Automation<br>> ISSUER: MCIT Egypt<br><br>Specialized in STLC, Selenium, and Enterprise Quality Control.`;
+    openTerminal(code, "certificates/depi_qa.log");
+}
+function handleCV() {
+    // التأكد من وجود دالة التيرمينال لفتح الرسالة
+    if (typeof openTerminal === "function") {
+        openTerminal(`
+            > INITIALIZING SECURE ACCESS...<br>
+            > USER: SOBHEY YOUSEF<br>
+            > FILE: ATS Template.pdf<br>
+            > STATUS: <span style="color: #00ff00;">AUTHORIZED</span>
+        `);
+    }
+
+    // هيفتح ملف الـ PDF اللي في الفولدر عندك بعد ثانيتين
+    setTimeout(() => {
+        window.open('ATS Template.pdf', '_blank');
+    }, 2000);
+}
+function openNasaCert() {
+    const code = `
+    <span class="comment">// INITIATING NASA SPACE APPS VERIFICATION...</span><br>
+    <span class="key">ACHIEVEMENT</span>: Global Nominee 2024<br>
+    <span class="key">PROJECT</span>: <span class="val">EarlyEpi-Ready</span><br>
+    <span class="key">LOCATION</span>: NASA Space Apps Cairo Edition<br><br>
+    > <span class="val">TECHNICAL_LOG</span>: Processed MODIS & VIIRS Satellite imagery.<br>
+    > <span class="val">ALGORITHM</span>: Integrated epidemic forecasting with climate data.<br>
+    > <span class="val">RANK</span>: Top 10 National Finalists (Egypt).<br><br>
+    <span class="comment">/* "System successfully analyzed planetary telemetry." */</span>
+    `;
+    // استدعاء دالة الـ Terminal اللي موجودة في الكود الأصلي بتاعك
+    openTerminal(code, "achievements/NASA_SpaceApps_2024.pdf");
+}
+function openNasaCert() {
+    // 1. تشغيل تأثير التيرمينال اللي أنت عامله أصلاً
+    const code = `
+    <span class="comment">// NASA SPACE APPS VERIFICATION...</span><br>
+    <span class="key">ACHIEVEMENT</span>: Global Nominee 2024<br>
+    <span class="val">STATUS</span>: AUTHORIZED_VIEW<br>
+    > Opening Certificate Image...
+    `;
+    openTerminal(code, "achievements/NASA_2024.img");
+
+    // 2. إظهار الصورة الكبيرة
+    const modal = document.getElementById('imageModal');
+    const fullImg = document.getElementById('fullCertImage');
+    
+    fullImg.src = "NASA .jpeg"; // نفس اسم الصورة اللي في الكود عندك
+    modal.style.display = "flex";
+}
+
+// دالة قفل نافذة الصورة
+function closeImageModal() {
+    document.getElementById('imageModal').style.display = "none";
+}   
+    </script>
+    <div id="imageModal" class="terminal-modal" onclick="closeImageModal()" style="display:none; align-items:center; justify-content:center; background: rgba(0,0,0,0.9);">
+    <span style="position:absolute; top:20px; right:30px; color:#fff; font-size:40px; cursor:pointer;">&times;</span>
+    <img id="fullCertImage" src="" style="max-width:90%; max-height:80vh; border: 2px solid var(--primary); border-radius:10px; box-shadow: 0 0 30px var(--primary);">
+</div>
+</body>
+</html>
